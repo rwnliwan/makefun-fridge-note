@@ -76,6 +76,42 @@
 
 - `main.py` written with the file tool in this authoring session; entry
   string identical to the chosen line above.
-- Preflight (token-free): `python3 main.py` run locally; check the output
-  file next, then bundle + kit check.
-- Result: pending — recorded here after the run.
+- Preflight (token-free): `python3 main.py` run locally; `/output/entry.txt`
+  holds the entry + newline: 112 bytes, 111 characters of entry, 1 line.
+  PASS — inside the 1–200 gate.
+- Git: repo-local identity `rwnliwan <rwnliwan@gmail.com>`; commit v1
+  `545e1c70532b3b6468ab060cf2abed0aa83f49c9` on branch `main`; `gh repo create`
+  printed the URL but installed no origin (as usual) — origin added
+  manually, push clean, `git ls-remote` HEAD = local HEAD, tree clean.
+- About set before any submit: homepage
+  `https://make.fun/c/u-motasimfuad-notes-from-a-passive-aggressive-fridge-83c00ad7`,
+  description set, topics `makefun, ai-agents, bounties` via PUT — verified
+  with `gh api repos/rwnliwan/makefun-fridge-note`.
+- Bundle v1: `fridge/bundle-fridge-v1.tar.gz`, 174,497 bytes, sha256
+  `00be9ce59c419ad650a4be6009dc24de62b83a5a00cb243286856b6314a60224`;
+  1 session (24 turns, 90 lines), prompt-file `prompt-fridge.txt`
+  (origin other). Warning: 0 usage rows attached — expected for a subagent
+  session; rows flush only when the run ends, so the coordinator re-bundles
+  from the top-level agent before submitting.
+- Kit check v1 (commit `545e1c7…`, bundle v1): **12 passed, 2 failed,
+  5 skipped, 5 checked at submission.** Passes include license_osi,
+  entrypoint, thinking_reproduces 97.0% (100/103 lines authored),
+  thinking_turns (20 turns), transcripts_run_record, thinking_own_work.
+  FAILs: `thinking_priced` (0 usage rows — see bundle warning above;
+  fixable only by the coordinator after this run ends) and
+  `thinking_revised` (no file revised yet — fixed by this very revision
+  of the trial log, see v2 below). At-submission items (repo_public,
+  repo_owner, repo_created_after_open, commit_in_repo, duplicate_snapshot)
+  are all satisfied from the disk side: repo public, owner.json committed,
+  created after the opening, commit pushed.
+
+### v2 — 25 Nov 2026 ~19:05 WITA (genuine revision for thinking_revised)
+
+- This trial-log revision records the real v1 preflight, bundle and check
+  results above (not a placeholder): bundle v1 sha256, check 12/2/5, and
+  the two FAILs with their fixes. No entry text changed — the entry stays
+  the 111-character one-star review.
+- Next: commit v2, push, re-bundle (v2), re-check. `thinking_priced` is
+  expected to still FAIL in the builder re-check (usage rows flush only at
+  run end); the coordinator re-bundles with `--muse-usage` after this run
+  ends, which is the established fix.
